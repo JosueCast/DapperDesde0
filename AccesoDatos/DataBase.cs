@@ -15,7 +15,7 @@ namespace AccesoDatos
         {
             get
             {
-                return ConfigurationManager.ConnectionStrings["NWConnectionString"].ConnectionString;
+                return ConfigurationManager.ConnectionStrings["NWConnectionStrings"].ConnectionString;
 
             }
         }

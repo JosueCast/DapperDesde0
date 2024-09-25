@@ -94,6 +94,51 @@ namespace AccesoDatos
 
 
 
+        public int AcctualizarCliente(Customers customers)
+        {
+            using (var conexion = DataBase.GetSqlConnection())
+            {
+                String UpdateCustomer = "";
+                UpdateCustomer = UpdateCustomer + "UPDATE [dbo].[Customers] " + "\n";
+                UpdateCustomer = UpdateCustomer + "   SET [CustomerID] = @CustomerID " + "\n";
+                UpdateCustomer = UpdateCustomer + "      ,[CompanyName] = @CompanyName " + "\n";
+                UpdateCustomer = UpdateCustomer + "      ,[ContactName] = @ContactName " + "\n";
+                UpdateCustomer = UpdateCustomer + "      ,[ContactTitle] = @ContactTitle " + "\n";
+                UpdateCustomer = UpdateCustomer + "      ,[Address] = @Address " + "\n";
+                UpdateCustomer = UpdateCustomer + " WHERE CustomerID = @CustomerID";
+
+
+                var actualizadas =
+                    conexion.Execute(UpdateCustomer, new
+                    {
+                        CustomerID = customers.CustomerID,
+                        CompanyName = customers.CompanyName,
+                        ContactName = customers.ContactName,
+                        ContactTitle = customers.ContactTitle,
+                        Address = customers.Address
+                    });
+                return actualizadas;
+            }
+        }
+
+
+        public int EliminarCliente(string Id)
+        {
+
+            using (var conexion = DataBase.GetSqlConnection())
+            {
+
+                String Delete = "";
+                Delete = Delete + "DELETE FROM [dbo].[Customers] " + "\n";
+                Delete = Delete + "      WHERE CustomerID = @CustomerID";
+
+                var eliminadas = conexion.Execute(Delete, new
+                {
+                    CustomerID = Id
+                });
+                return eliminadas;
+            }
+        }
 
 
 
